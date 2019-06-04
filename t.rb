@@ -1,19 +1,14 @@
 public
-def my_all?(*arg)
-  if block_given?
-      (self.size).times do |w|
-        # return false unless yield(self[w])
-        return false if self[w]==nil || yield(self[w])==false
-      end
 
-    else 
-      self.each do |obj| 
-         return false if obj ==false || obj==nil
-         return true
-        end
-    self.size==0?true:true
-    end
-  true
+def my_count(arg = nil)
+   count = 0
+   if arg.nil?
+     self.size.times { |x| count += 1 }
+   else
+     self.size.times { |w| count += 1 if self[w] == arg }
+   end
+   self.size.times { |w| count += 1 if yield self[w] }  if block_given?
+   count
 end
-a=[2,4,5]
-puts a.my_all?
+a=[1,2,8,nil]
+puts a.my_count

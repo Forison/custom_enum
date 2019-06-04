@@ -1,4 +1,4 @@
-# module Enumerable
+module Enumerable
     def my_each(arg)
       # your code here
       if arg.class==Array
@@ -51,9 +51,61 @@ def my_all?(*arg)
         end
     self.size==0?true:true
     end
+    return true if self.size==0
   true
 end
 
-# end
+
+def my_any?(*arg)
+ if block_given?
+    (self.size).times do |w|
+       return true if self[w]!=false || self[w]!=nil 
+    end
+  else
+      self.each do |obj| 
+         return true if obj ==false || obj==nil
+         return true
+        end
+    self.size==0?false:false
+  end
+  return false if self.size==0
+  false
+end
+
+
+
+def my_none
+     if block_given?
+      (self.size).times do |w|
+        # return false unless yield(self[w])
+        return true if self[w]==nil || yield(self[w])==false
+      end
+
+    else 
+      self.each do |obj| 
+         return true if obj ==false || obj==nil
+         return false
+        end
+    self.size==0?false:false
+    end
+    return false if self.size==0
+  false
+
+end
+
+
+def my_count(arg = nil)
+   count = 0
+   if arg.nil?
+     self.size.times { |x| count += 1 }
+   else
+     self.size.times { |w| count += 1 if self[w] == arg }
+   end
+   self.size.times { |w| count += 1 if yield self[w] }  if block_given?
+   count
+end
+
+
+end
 a=[nil]
 puts a.my_all?
