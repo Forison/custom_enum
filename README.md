@@ -3,7 +3,7 @@
 This project is part of a series of projects to be completed by students of [Microverse](https://www.microverse.org/ "The Global School for Remote Software Developers!").
 The motive of this project is to replicate some enumerable methods in Ruby.This is an application of  the concept learnt on  Enumerable module that gets mixed into the Array and Hash classes.This seek to reinforce the knowledge on Ruby's enumerable methods.
 
->The select method replicated in this project are:
+>The selected method replicated in this project are:
 - ```each```
 - ```each_with_index```
 - ```select```
@@ -51,7 +51,7 @@ $ cd custom_enum
 >load the module and use our custom methods
 
 ```ruby
-require "./enum-methods>"
+require "enum-methods>"
 ```
 >using custom  ```my_inject``` method in multiply_els(arg) method
 
