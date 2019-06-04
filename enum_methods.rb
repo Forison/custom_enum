@@ -1,49 +1,43 @@
 module Enumerable
-   
- def my_each
-  # your code here
-   if self.class == Array
-     self.size.times{ |i| yield self[i] }
-   end
-   if self.class == Hash
-     self.size.times{ |i| yield self.keys[i] ,self.values[i] } 
-   end
- end
-
- def my_each_with_index
-  (self.size-1).times{ |i| yield self[i],i }
- end
-
- def my_select
-   if block_given?
-     if self.class ==Array
-      temp=[]
-      (self.size-1).times do |x|
-        yield temp.push(x)
-        return temp
-     end
-   end
-   if self.class == Hash
-    temp={}
-    (self.size-1).times do |key,value|
-    yield temp[key] = value
-    return temp
+  def my_each
+    if self.class == Array
+      self.size.times{ |i| yield self[i] }
     end
-   end
- else
-    "this method requires a block"
-end
-
-end
-
-
-
-def my_all?(*arg)
-  if block_given?
-    (self.size).times do |w|
-     # return false unless yield(self[w])
-     return false if self[w]==nil || yield(self[w])==false
+    if self.class == Hash
+      self.size.times{ |i| yield self.keys[i] ,self.values[i] }
+    end
   end
+
+  def my_each_with_index
+   (self.size-1).times{ |i| yield self[i],i }
+  end
+
+  def my_select
+    if block_given?
+      if self.class ==Array
+       temp=[]
+       (self.size-1).times do |x|
+         yield temp.push(x)
+         return temp
+      end
+      end
+    if self.class == Hash
+      temp={}
+      (self.size-1).times do |key,value|
+      yield temp[key] = value
+      return temp
+      end
+    end
+    else
+    "this method requires a block"
+    end
+  end
+  
+ def my_all?(*arg)
+  if block_given?
+       (self.size).times do |w|
+       return false if self[w]==nil || yield(self[w])==false
+      end
 
   else 
     self.each do |obj| 
@@ -55,7 +49,6 @@ def my_all?(*arg)
   return true if self.size==0
   true
 end
-
 
 def my_any?(*arg)
  if block_given?
@@ -72,8 +65,6 @@ def my_any?(*arg)
   return false if self.size == 0
   false
 end
-
-
 
 def my_none
   if block_given?
@@ -94,7 +85,6 @@ def my_none
 
 end
 
-
 def my_count(arg = nil)
    count = 0
    if arg.nil?
@@ -107,14 +97,12 @@ def my_count(arg = nil)
 end
 
 def my_map
-  # your code here
   if self.class==Array
     self.size.times{ |i| yield self[i] }
   end
   if self.class==Hash
     self.size.times{ |i| yield self.keys[i] ,self.values[i] } 
   end
-
 end
 
 def my_inject(param = nil)
