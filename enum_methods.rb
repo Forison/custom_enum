@@ -1,19 +1,21 @@
 module Enumerable
-    def my_each(arg)
-      # your code here
-      if arg.class==Array
-      0.upto(arg.size-1){|i| yield arg[i]}
-      end
-      if arg.class==Hash
-      (arg.length).times{|i| yield arg.keys[i] ,arg.values[i]} 
-      end
-    end
+   
+ def my_each
+  # your code here
+   if self.class==Array
+     self.size.times{ |i| yield self[i] }
+   end
+   if self.class==Hash
+     self.size.times{ |i| yield self.keys[i] ,self.values[i] } 
+   end
 
-    def my_each_with_index(arg)
-      (arg.length-1).times{|i| yield arg[i],i}
-    end
+ end
 
-  def my_select
+ def my_each_with_index(arg)
+  (arg.length-1).times{|i| yield arg[i],i}
+ end
+
+ def my_select
    if block_given?
    if self.class ==Array
     temp=[]
@@ -29,7 +31,7 @@ module Enumerable
         return temp
     end
    end
-else
+ else
     "this method requires a block"
 end
 
@@ -115,5 +117,23 @@ def my_map
   end
 
 end
+
+def my_inject(param=nil)
+    if param.nil?
+      acc = self.first
+      1.upto(self.size-1){ |value| acc = yield(acc, self[value]) }
+      acc
+    else
+      acc = param
+      self.size.times{ |value| acc = yield(acc, self[value]) }
+      acc
+    end
+end
+
+def multiply_els(arr)
+    arr.my_inject {|product, current| product * current}
+end
+ar=[2,4,5]
+puts multiply_els(ar)
 
 end
