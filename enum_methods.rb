@@ -107,5 +107,3 @@ end
 
 
 end
-a=[nil]
-puts a.my_all?
