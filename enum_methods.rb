@@ -75,19 +75,19 @@ end
 
 
 def my_none
-     if block_given?
-      (self.size).times do |w|
-        # return false unless yield(self[w])
-        return true if self[w]==nil || yield(self[w])==false
-      end
+  if block_given?
+    (self.size).times do |w|
+     # return false unless yield(self[w])
+    return true if self[w]==nil || yield(self[w])==false
+  end
 
-    else 
-      self.each do |obj| 
-         return true if obj ==false || obj==nil
-         return false
-        end
-    self.size==0?false:false
+  else 
+    self.each do |obj| 
+    return true if obj ==false || obj==nil
+    return false
     end
+    self.size==0?false:false
+  end
     return false if self.size==0
   false
 
@@ -105,5 +105,15 @@ def my_count(arg = nil)
    count
 end
 
+def my_map
+  # your code here
+  if self.class==Array
+    self.size.times{ |i| yield self[i] }
+  end
+  if self.class==Hash
+    self.size.times{ |i| yield self.keys[i] ,self.values[i] } 
+  end
+
+end
 
 end
