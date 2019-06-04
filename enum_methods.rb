@@ -2,33 +2,32 @@ module Enumerable
    
  def my_each
   # your code here
-   if self.class==Array
+   if self.class == Array
      self.size.times{ |i| yield self[i] }
    end
-   if self.class==Hash
+   if self.class == Hash
      self.size.times{ |i| yield self.keys[i] ,self.values[i] } 
    end
-
  end
 
- def my_each_with_index(arg)
-  (arg.length-1).times{|i| yield arg[i],i}
+ def my_each_with_index
+  (self.size-1).times{ |i| yield self[i],i }
  end
 
  def my_select
    if block_given?
-   if self.class ==Array
-    temp=[]
-    (self.size-1).times do |x|
+     if self.class ==Array
+      temp=[]
+      (self.size-1).times do |x|
         yield temp.push(x)
         return temp
-    end
+     end
    end
-   if self.class==Hash
+   if self.class == Hash
     temp={}
     (self.size-1).times do |key,value|
-        yield temp[key]=value
-        return temp
+    yield temp[key] = value
+    return temp
     end
    end
  else
@@ -41,19 +40,19 @@ end
 
 def my_all?(*arg)
   if block_given?
-      (self.size).times do |w|
-        # return false unless yield(self[w])
-        return false if self[w]==nil || yield(self[w])==false
-      end
+    (self.size).times do |w|
+     # return false unless yield(self[w])
+     return false if self[w]==nil || yield(self[w])==false
+  end
 
-    else 
-      self.each do |obj| 
-         return false if obj ==false || obj==nil
-         return true
-        end
+  else 
+    self.each do |obj| 
+    return false if obj ==false || obj==nil
+      return true
+    end
     self.size==0?true:true
     end
-    return true if self.size==0
+  return true if self.size==0
   true
 end
 
@@ -61,16 +60,16 @@ end
 def my_any?(*arg)
  if block_given?
     (self.size).times do |w|
-       return true if self[w]!=false || self[w]!=nil 
+       return true if self[w] != false || self[w] != nil 
     end
   else
-      self.each do |obj| 
-         return true if obj ==false || obj==nil
-         return true
-        end
-    self.size==0?false:false
+    self.each do |obj| 
+      return true if obj == false || obj == nil
+      return true
+    end
+    self.size == 0 ? false:false
   end
-  return false if self.size==0
+  return false if self.size == 0
   false
 end
 
@@ -80,17 +79,17 @@ def my_none
   if block_given?
     (self.size).times do |w|
      # return false unless yield(self[w])
-    return true if self[w]==nil || yield(self[w])==false
-  end
+      return true if self[w] == nil || yield(self[w]) == false
+    end
 
   else 
     self.each do |obj| 
-    return true if obj ==false || obj==nil
-    return false
+      return true if obj == false || obj == nil
+      return false
     end
-    self.size==0?false:false
+      self.size == 0? false:false
   end
-    return false if self.size==0
+    return false if self.size == 0
   false
 
 end
@@ -118,10 +117,10 @@ def my_map
 
 end
 
-def my_inject(param=nil)
+def my_inject(param = nil)
     if param.nil?
       acc = self.first
-      1.upto(self.size-1){ |value| acc = yield(acc, self[value]) }
+      1.upto( self.size-1 ){ |value| acc = yield(acc, self[value]) }
       acc
     else
       acc = param
@@ -131,9 +130,7 @@ def my_inject(param=nil)
 end
 
 def multiply_els(arr)
-    arr.my_inject {|product, current| product * current}
+  arr.my_inject { |product, value| product * value}
 end
-ar=[2,4,5]
-puts multiply_els(ar)
 
 end
