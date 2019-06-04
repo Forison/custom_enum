@@ -51,7 +51,7 @@ $ cd custom_enum
 >load the module and use our custom methods
 
 ```ruby
-require "enum-methods>"
+require "enum-methods"
 ```
 >using custom  ```my_inject``` method in multiply_els(arg) method
 
