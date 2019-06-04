@@ -55,7 +55,8 @@ require "enum-methods"
 ```
 >using custom  ```my_inject``` method in multiply_els(arg) method
 
-```def multiply_els(arr)
+```
+    def multiply_els(arr)
       arr.my_inject { |product, value| product * value}
    end
    ar=[2,4,5]
