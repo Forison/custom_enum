@@ -48,15 +48,23 @@ end
   true
 end
 
+def my_any?(*arg)
+  if block_given?
+    self.my_each { |a| return true if yield(a) } 
+  else
+    self.my_each { |a| return true if a }
+  end
+  if arg.empty?
+   return false if self.size == 0  
+  end
+ false
+end
 
-
-def my_none
+def my_none?
   if block_given?
     (self.size).times do |w|
-     # return false unless yield(self[w])
       return true if self[w] == nil || yield(self[w]) == false
     end
-
   else 
     self.each do |obj| 
       return true if obj == false || obj == nil
