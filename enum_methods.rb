@@ -12,26 +12,24 @@ module Enumerable
     self.size.times{|a| yield self[a] , a}
   end
 
-  def my_select
-    if block_given?
-      if self.class ==Array
-       temp=[]
-       (self.size-1).times do |x|
-         yield temp.push(x)
-         return temp
-      end
-      end
-    if self.class == Hash
-      temp={}
-      (self.size-1).times do |key,value|
-      yield temp[key] = value
-      return temp
-      end
+
+def my_select
+  temp=[]
+  if self.class==Array
+    temp = []
+    my_each do |x|
+        temp push(x) if yield(x)
     end
-    else
-    "this method requires a block"
-    end
+    temp
   end
+  if self.class == Hash
+    temp = {}
+    my_each do |keys, values|
+        temp[keys] = value if yield(keys, values)
+    end
+     temp
+  end
+end
 
  def my_all?(*arg)
   if block_given?

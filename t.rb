@@ -8,11 +8,7 @@ def my_each
   end
 end
 
-def my_each_with_index
-    self.size.times{|a| yield self[a] , a}
-end
-
 arr=[1,2,3,4,5]
-arr.my_each_with_index{ |a,q| puts "#{a} this other #{q}" }
-puts "--------------------"
-arr.each_with_index{ |a,q| puts "#{a} this other #{q}" }
+one=arr.my_select{ |y| y.even? }
+# two=arr.select{|x| x.even?}
+puts one
