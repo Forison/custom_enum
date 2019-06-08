@@ -77,16 +77,18 @@ def my_none?
 
 end
 
-def my_count(arg = nil)
-   count = 0
-   if arg.nil?
-     self.size.times { |x| count += 1 }
-   else
-     self.size.times { |w| count += 1 if self[w] == arg }
-   end
-   self.size.times { |w| count += 1 if yield self[w] }  if block_given?
-   count
+
+def my_count
+  temp=[]
+  if block_given?
+    self.my_each{ |a| temp.push(a) if yield (a) }
+    temp.size
+  else
+    return self.size
+  end
 end
+
+
 
 def my_map
   if self.class==Array
