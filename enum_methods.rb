@@ -9,7 +9,7 @@ module Enumerable
   end
 
   def my_each_with_index
-   (self.size-1).times{ |i| yield self[i],i }
+    self.size.times{|a| yield self[a] , a}
   end
 
   def my_select
@@ -32,7 +32,7 @@ module Enumerable
     "this method requires a block"
     end
   end
-  
+
  def my_all?(*arg)
   if block_given?
        (self.size).times do |w|
