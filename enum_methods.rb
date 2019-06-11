@@ -14,22 +14,20 @@ module Enumerable
 
 
 def my_select
- 
-  if self.class==Array
-    temp = []
-    my_each do |x|
+    if self.class == Array
+      temp = []
+      my_each do |x|
         temp.push(x) if yield(x)
+      end
+      temp
+    elsif self.class == Hash
+      temp = {}
+      my_each do |key, value|
+        temp[key] = value if yield(key, value)
+      end
+      temp
     end
-     temp
   end
-  if self.class == Hash
-    temp = {}
-    my_each do |keys, values|
-        temp[keys] = value if yield(keys, values)
-    end
-     temp
-  end
-end
 
  def my_all?(*arg)
   if block_given?
