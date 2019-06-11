@@ -76,15 +76,24 @@ def my_none?
 end
 
 
-def my_count
+def my_count(arg = nil)
   temp=[]
   if block_given?
     self.my_each{ |a| temp.push(a) if yield (a) }
     temp.size
-  else
-    return self.size
   end
+  if arg.nil?
+    self.size
+  else
+    count = 0
+    self.my_each do |x|
+        count += 1 if x == arg
+    end
+      count
+  end
+  
 end
+
 
 
 
