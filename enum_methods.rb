@@ -75,29 +75,30 @@ def my_none?
 
 end
 
-
 def my_count(arg = nil)
-  temp=[]
-  if block_given?
-    self.my_each{ |a| temp.push(a) if yield (a) }
-    temp.size
-  end
-  if arg.nil?
-    self.size
-  else
-    count = 0
-    self.my_each do |x|
-        count += 1 if x == arg
-    end
-      count
-  end
+   if block_given? && arg.nil?
+      temp = []
+      my_each do |x|
+        temp.push(x) if yield(x)
+      end
+       temp.size
+   elsif arg.nil? && !block_given?
+       self.size
+   elsif !arg.nil? && !block_given?
+       count = 0
+       self.my_each do |x|
+          count += 1 if x == arg
+       end
+        count
+   end
+  
   
 end
 
 
 
 
- def my_map(proc = nil)
+def my_map(proc = nil)
     if self.class == Array
       temp = []
       if proc.is_a? Proc
@@ -115,7 +116,7 @@ end
       end
       temp
     end
-  end
+end
 
 def my_inject(param = nil)
     if param.nil?
