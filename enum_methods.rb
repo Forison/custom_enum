@@ -14,13 +14,13 @@ module Enumerable
 
 
 def my_select
-  temp=[]
+ 
   if self.class==Array
     temp = []
     my_each do |x|
-        temp push(x) if yield(x)
+        temp.push(x) if yield(x)
     end
-    temp
+     temp
   end
   if self.class == Hash
     temp = {}
